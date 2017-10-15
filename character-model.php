@@ -91,11 +91,11 @@ else {
 }
 $character_model_data['race_gender'] = $race_model_data['modeldata_2'].$character_model_data['gender_1'];
 $player_model = $characters->GetPlayerBytes();
-$character_model_data['face_color'] = ($player_model['playerBytes']>>8)%256;
-$character_model_data['hair_style'] = ($player_model['playerBytes']>>16)%256;
-$character_model_data['hair_color'] = ($player_model['playerBytes']>>24)%256;
-$character_model_data['skin_style'] = $player_model['playerBytes']%256;
-$character_model_data['facial_hair'] = $player_model['playerBytes2']%256;
+$character_model_data['face_color'] = $player_model['face'];
+$character_model_data['hair_style'] = $player_model['hairStyle'];
+$character_model_data['hair_color'] = $player_model['hairColor'];
+$character_model_data['skin_style'] = $player_model['skin'];
+$character_model_data['facial_hair'] = $player_model['facialStyle'];
 $character_model_data['hair_style'] += 2; // Hack?
 
 $character_model_data['hide_helm'] = 0;

@@ -86,8 +86,11 @@ Class Characters {
      * @category Characters class
      * @access   private
      **/
-    private $playerBytes = false;
-    private $playerBytes2 = false;
+    private $skin;
+    private $face;
+    private $hairStyle;
+    private $hairColor;
+    private $facialStyle;
     private $playerFlags = false;
 
     /**
@@ -395,8 +398,11 @@ Class Characters {
             `characters`.`gender`,
             `characters`.`level`,
             `characters`.`money`,
-            `characters`.`playerBytes`,
-            `characters`.`playerBytes2`,
+            `characters`.`skin`,
+            `characters`.`face`,
+            `characters`.`hairStyle`,
+            `characters`.`hairColor`,
+            `characters`.`facialStyle`,
             `characters`.`playerFlags`,
             `characters`.`specCount`,
             `characters`.`activeSpec`,
@@ -700,7 +706,7 @@ Class Characters {
      * @return   array
      **/
     public function GetPlayerBytes() {
-        return array('playerBytes' => $this->playerBytes, 'playerBytes2' => $this->playerBytes2, 'playerFlags' => $this->playerFlags);
+        return array('skin' => $this->skin, 'face' => $this->face, 'hairStyle' => $this->hairStyle, 'hairColor' => $this->hairColor, 'facialStyle' => $this->facialStyle, 'playerFlags' => $this->playerFlags);
     }
 
     /**
