@@ -31,7 +31,7 @@ define('load_itemprototype_class', true);
 if(!@include('includes/armory_loader.php')) {
     die('<b>Fatal error:</b> unable to load system files.');
 }
-header('Content-type: text/xml');
+header('Content-type: text/html');
 $itemID = (isset($_GET['i'])) ? (int) $_GET['i'] : null;
 $name = (isset($_GET['cn'])) ? $_GET['cn'] : null;
 $realmId = (isset($_GET['r'])) ? $utils->GetRealmIdByName($_GET['r']) : 1;
@@ -118,7 +118,18 @@ if($utils->IsItemComparisonAllowed()) {
 $xml->XMLWriter()->endElement();  //itemTooltips
 $xml->XMLWriter()->endElement(); //page
 $xml_cache_data = $xml->StopXML();
+
+$newxml = new DOMDocument;
+$newxml->loadXML($xml_cache_data);
+
+$xslt = new XSLTProcessor;
+$xslDoc = new DOMDocument;
+$xslDoc->load(__DIR__ . '/_layout/items/tooltip.xsl');
+$xslt->importStylesheet($xslDoc);
+$xml_cache_data = $xslt->transformToXML($newxml);
 echo $xml_cache_data;
+
+// echo $xml_cache_data;
 if(Armory::$armoryconfig['useCache'] == true && !isset($_GET['skipCache'])) {
     // Write cache to file
     $cache_data = $utils->GenerateCacheData($itemID, ($characters->CheckPlayer()) ? $characters->GetGUID() : 0, 'item-tooltip');

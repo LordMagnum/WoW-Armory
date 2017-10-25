@@ -571,8 +571,8 @@ function setTipText(tipStr)
 	var tooltipTxt = $("#globalToolTip_text");	
 	
 	$(tooltipTxt).html("");
-	$(tooltipTxt).append(tipStr);	
-		
+	$(tooltipTxt).append(tipStr);
+
 	//adds "Click to view this item on the WoW Armory" at the very end of the tooltip used on Facebook app
 	if(tipsEnabledFacebook) $(tooltipTxt).append(tooltipItemNotice); 
 
@@ -611,114 +611,37 @@ function setTipText(tipStr)
 	
 }
 
-//get the html for an item via ajax
-function getItemHtml(itemUrl)
-{
-	//load XSL stylesheet if we haven't yet	
-	if(!($.browser.safari) && !($.browser.safari)){
-		if(itemToolTipXSLLoaded == false)
-		{
-			//get the stylesheet			
-			var xslDoc = Sarissa.getDomDocument();
-			xslDoc.async = false;
-			xslDoc.load("_layout/items/tooltip.xsl");
-			
-			xsltProcessor = new XSLTProcessor();
-			xsltProcessor.importStylesheet(xslDoc);		
-			
-			itemToolTipXSLLoaded = true;
-		}
-	}	
-	
-	$.ajax({
-		type: "GET",
-		url: itemUrl,
-		success: function(msg){		
-			
-			//cache the tooltip text based on browser
-			if(($.browser.safari) || ($.browser.safari)){
-				toolVault[itemUrl] = msg;
-				
-				if(toolVault[itemUrl].length <= 4)
-					toolVault[itemUrl] = errorLoadingToolTip;
-			}else{
-				var bufferedDiv = document.createElement("div");
-				bufferedDiv.innerHTML = "";
-				bufferedDiv.appendChild(xsltProcessor.transformToFragment(msg,window.document));					
-				toolVault[itemUrl] = bufferedDiv.innerHTML;
-				
-				//set error message
-				if(toolVault[itemUrl].length <= 4)
-					toolVault[itemUrl] = errorLoadingToolTip;					
-			}
-		},
-		error: function(msg){				
-			toolVault[itemUrl] = errorLoadingToolTip;
-		}
-	});
-	
-	return toolVault[itemUrl];	
-}
-
-
-
-
 //gets the "pretty" html for an item tooltip via ajax
 function getTipHTML(itemID, itemWithTip, mouseEvent)
 {
-	//load XSL stylesheet if we haven't yet	
-	if(!($.browser.safari) && !($.browser.safari)){
-		if(itemToolTipXSLLoaded == false)
-		{
-			//get the stylesheet			
-			var xslDoc = Sarissa.getDomDocument();
-			xslDoc.async = false;
-			xslDoc.load("_layout/items/tooltip.xsl");
-			
-			xsltProcessor = new XSLTProcessor();
-			xsltProcessor.importStylesheet(xslDoc);		
-			
-			itemToolTipXSLLoaded = true;
-		}
-	}
-	
 	//get the "pretty-html" for the tooltip
 	if(toolVault[itemID] == null)
-	{		
+	{
 		//set loading text  
 		setTipText(tLoading+"...");
 		setToolTipPosition(itemWithTip,mouseEvent);
-		
+
 		var urlstr = "item-tooltip.xml?i="+itemID;
-		
+
 		$.ajax({
 			type: "GET",
 			url: urlstr,
 			success: function(msg){				
-				//cache the tooltip text based on browser
-				if(($.browser.safari) || ($.browser.safari)){
-					toolVault[itemID] = msg;
-					
-					if(toolVault[itemID].length <= 4)
-						toolVault[itemID] = errorLoadingToolTip;
-				}else{
-					var bufferedDiv = document.createElement("div");
-					bufferedDiv.innerHTML = "";
-					bufferedDiv.appendChild(xsltProcessor.transformToFragment(msg,window.document));					
-					toolVault[itemID] = bufferedDiv.innerHTML;
-					
-					//set error message
-					if(toolVault[itemID].length <= 4)
-						toolVault[itemID] = errorLoadingToolTip;					
-				}
-				
+				var bufferedDiv = document.createElement("div");
+				bufferedDiv.innerHTML = msg;
+				toolVault[itemID] = bufferedDiv.innerHTML;
+
+				//set error message
+				if(toolVault[itemID].length <= 4)
+					toolVault[itemID] = errorLoadingToolTip;					
+
 				//prevent showing the wrong item or an empty tooltip
-				if(currItemID == itemID){					
+				if(currItemID == itemID){
 					setTipText(toolVault[itemID]);
-					setToolTipPosition(itemWithTip,mouseEvent); //set the position of the tooltip	
+					setToolTipPosition(itemWithTip,mouseEvent); //set the position of the tooltip
 				}
 			},
-			error: function(msg){				
+			error: function(msg){
 				setTipText(errorLoadingToolTip);
 			}
 		});
