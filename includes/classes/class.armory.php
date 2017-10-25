@@ -112,8 +112,11 @@ Class Armory
                     self::$currentRealmInfo = array('name' => self::$connectionData['name'], 'id' => $realm_id, 'type' => self::$connectionData['type'], 'connected' => true);
                     self::$wDB = new self::$dbClass(self::$connectionData['host_world'], self::$connectionData['user_world'], self::$connectionData['pass_world'], self::$connectionData['port_world'], self::$connectionData['name_world'], self::$connectionData['charset_world']);
                 }
+                $realm_info = self::$realmData[$realm_id];
             }
-            $realm_info = self::$realmData[1];
+            else
+                $realm_info = !empty(self::$realmData) ? array_values(self::$realmData)[0] : [];
+
             if (self::$cDB == null)
                 self::$cDB = new self::$dbClass($realm_info['host_characters'], $realm_info['user_characters'], $realm_info['pass_characters'], $realm_info['port_characters'], $realm_info['name_characters'], $realm_info['charset_characters']);
             if (self::$wDB == null)
