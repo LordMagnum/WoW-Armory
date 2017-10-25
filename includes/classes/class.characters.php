@@ -1183,12 +1183,12 @@ Class Characters {
                     case SERVER_TRINITY:
                         for($k = 1; $k < 6; $k++) {
                             if($char_talent['spell'] == $class_talent['Rank_' . $k]) {
-                                $talent_build[$char_talent['spec']] .= $k;
+                                $talent_build[$char_talent['talentGroup']] .= $k;
                                 $current_found = true;
-                                $talent_points[$char_talent['spec']][$class_talent['TalentTab']] += $k;
+                                $talent_points[$char_talent['talentGroup']][$class_talent['TalentTab']] += $k;
                             }
                         }
-                        $last_spec = $char_talent['spec'];
+                        $last_spec = $char_talent['talentGroup'];
                         break;
                     default:
                         Armory::Log()->writeError('%s : unknown server type');
@@ -1229,7 +1229,7 @@ Class Characters {
                 $specs_talents[$_tal['spec']][$_tal['talent_id']] = $_tal['current_rank']+1;
             }
             elseif($this->m_server == SERVER_TRINITY) {
-                $specs_talents[$_tal['spec']][$_tal['spell']] = true;
+                $specs_talents[$_tal['talentGroup']][$_tal['spell']] = true;
             }
         }
         if($this->m_server == SERVER_TRINITY) {
