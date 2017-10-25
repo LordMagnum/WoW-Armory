@@ -1,15 +1,8 @@
-# Add ignore files here
-.DS_Store
-
-.buildpath
-.project
-.settings/org.eclipse.php.core.prefs
-.settings/com.zend.php.remoteproject.core.prefs
-.settings/org.eclipse.php.server.core.phpServersPrefs.prefs
-.settings/org.eclipse.core.resources.prefs
 includes/classes/configuration.php
-wow-icons/_images/21x21/*
-wow-icons/_images/43x43/*
-wow-icons/_images/51x51/*
-wow-icons/_images/64x64/*
-wow-icons/_images/_talents31x31/*
+
+models
+images
+cache/_debug/tmp.dbg
+
+cache/_debug/tmp.dbg
+cache/_debug/tmp.dbg

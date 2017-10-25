@@ -108,12 +108,12 @@ Class Mangos {
         switch($infoType) {
             case 'title':
                 if(Armory::GetLocale() == 'en_gb' || Armory::GetLocale() == 'en_us') {
-                    $info = Armory::$wDB->selectCell("SELECT `Title` FROM `quest_template` WHERE `entry`=%d", $quest);
+                    $info = Armory::$wDB->selectCell("SELECT `Title` FROM `quest_template` WHERE `Entry`=%d", $quest);
                 }
                 else {
                     $info = Armory::$wDB->selectCell("SELECT `Title_loc%d` FROM `locales_quest` WHERE `entry`=%d", Armory::GetLoc(), $quest);
                     if(!$info) {
-                        $info = Armory::$wDB->selectCell("SELECT `Title` FROM `quest_template` WHERE `entry`=%d", $quest);
+                        $info = Armory::$wDB->selectCell("SELECT `Title` FROM `quest_template` WHERE `Entry`=%d", $quest);
                     }
                 }
                 break;
