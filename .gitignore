@@ -1,8 +1,6 @@
 includes/classes/configuration.php
-
-models
-images
+models/*
+images/*
 cache/_debug/tmp.dbg
-
-cache/_debug/tmp.dbg
-cache/_debug/tmp.dbg
+wow-icons/_images/*
+!wow-icons/_images/.htaccess
