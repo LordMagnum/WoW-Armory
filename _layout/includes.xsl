@@ -116,8 +116,6 @@
 	<!-- javascript variable used by shared project -->
 	<script type="text/javascript">global_nav_lang = '<xsl:value-of select="/page/@lang"/>'</script>
 
-	<div id="shared_topnav" class="tn_armory"><script src="shared/global/menu/topnav/buildtopnav.js"></script></div>
-	
 	<!-- containers-->
 	<div class="outer-container">
 		
