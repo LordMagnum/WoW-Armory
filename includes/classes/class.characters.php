@@ -1991,7 +1991,7 @@ Class Characters {
         $character_data = $this->db->selectCell("SELECT `data` FROM `armory_character_stats` WHERE `guid`=%d", $this->guid);
         $tmp_stats['melee_skill_id'] = Utils::GetSkillIDFromItemID($this->GetCharacterEquip('mainhand'));
         $tmp_stats['melee_skill'] = Utils::GetSkillInfo($tmp_stats['melee_skill_id'], $character_data);
-        $tmp_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1+20);
+        $tmp_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1+CR_WEAPON_SKILL_MAINHAND);
         $tmp_stats['additional'] = $tmp_stats['rating']/Utils::GetRatingCoefficient($rating, 2);
         $buff = $tmp_stats['melee_skill'][4]+$tmp_stats['melee_skill'][5]+intval($tmp_stats['additional']);
         $tmp_stats['value'] = $tmp_stats['melee_skill'][2]+$buff;
@@ -2064,7 +2064,7 @@ Class Characters {
         $tmp_stats = array();
         $rating    = $this->SetRating();
         $tmp_stats['value'] = round(Utils::GetFloatValue($this->GetDataField(UNIT_FIELD_BASEATTACKTIME), 2)/1000, 2);
-        $tmp_stats['hasteRating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 17);
+        $tmp_stats['hasteRating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_HASTE_MELEE);
         $tmp_stats['hastePercent'] = round($tmp_stats['hasteRating'] / Utils::GetRatingCoefficient($rating, 19), 2);
         unset($rating);
         return $tmp_stats;
@@ -2118,10 +2118,10 @@ Class Characters {
     private function GetCharacterMeleeHitRating() {
         $player_stats = array();
         $rating       = $this->SetRating();
-        $player_stats['value'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1+5);
+        $player_stats['value'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1+CR_HIT_MELEE);
         $player_stats['increasedHitPercent'] = floor($player_stats['value'] / Utils::GetRatingCoefficient($rating, 6));
-        $player_stats['armorPenetration'] = $this->GetDataField(PLAYER_FIELD_MOD_TARGET_PHYSICAL_RESISTANCE);
-        $player_stats['reducedArmorPercent'] = '0.00';
+        $player_stats['penetration'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_ARMOR_PENETRATION);
+        $player_stats['reducedArmorPercent'] = round($player_stats['penetration'] / Utils::GetRatingCoefficient($rating, 25), 2);
         unset($rating);
         return $player_stats;
     }
@@ -2136,7 +2136,7 @@ Class Characters {
         $rating = $this->SetRating();
         $player_stats = array();
         $player_stats['percent'] = Utils::GetFloatValue($this->GetDataField(PLAYER_CRIT_PERCENTAGE), 2);
-        $player_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1+8);
+        $player_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1+CR_CRIT_MELEE);
         $player_stats['plusPercent'] = floor($player_stats['rating'] / Utils::GetRatingCoefficient($rating, 9));
         unset($rating);
         return $player_stats;
@@ -2206,7 +2206,7 @@ Class Characters {
         }
         else {
             $player_stats['value'] = round(Utils::GetFloatValue($this->GetDataField(UNIT_FIELD_RANGEDATTACKTIME),2)/1000, 2);
-            $player_stats['hasteRating'] = round($this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1+18));
+            $player_stats['hasteRating'] = round($this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1+CR_HASTE_RANGED));
             $player_stats['hastePercent'] = round($player_stats['hasteRating']/ Utils::GetRatingCoefficient($rating, 19), 2);
         }
         unset($rating, $rangedSkillID);
@@ -2257,10 +2257,10 @@ Class Characters {
     private function GetCharacterRangedHitRating() {
         $player_stats = array();
         $rating       = $this->SetRating();
-        $player_stats['value'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 6);
+        $player_stats['value'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_HIT_RANGED);
         $player_stats['increasedHitPercent'] = floor($player_stats['value'] / Utils::GetRatingCoefficient($rating, 7));
-        $player_stats['reducedArmorPercent'] = $this->GetDataField(PLAYER_FIELD_MOD_TARGET_PHYSICAL_RESISTANCE);
-        $player_stats['penetration'] = 0;
+        $player_stats['penetration'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_ARMOR_PENETRATION);
+        $player_stats['reducedArmorPercent'] = round($player_stats['penetration'] / Utils::GetRatingCoefficient($rating, 25), 2);
         unset($rating);
         return $player_stats;
     }
@@ -2275,8 +2275,8 @@ Class Characters {
         $player_stats = array();
         $rating       = $this->SetRating();
         $player_stats['percent'] =  Utils::GetFloatValue($this->GetDataField(PLAYER_RANGED_CRIT_PERCENTAGE), 2);
-        $player_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 9);
-        $player_stats['plusPercent'] = floor($player_stats['rating']/ Utils::GetRatingCoefficient($rating, 10));
+        $player_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_CRIT_RANGED);
+        $player_stats['plusPercent'] = floor($player_stats['rating'] / Utils::GetRatingCoefficient($rating, 10));
         unset($rating);
         return $player_stats;
     }
@@ -2323,7 +2323,7 @@ Class Characters {
         $player_stats = array();
         $spellCrit    = array();
         $rating       = $this->SetRating();
-        $player_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 10);
+        $player_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_CRIT_SPELL);
         $player_stats['spell_crit_pct'] = $player_stats['rating'] / Utils::GetRatingCoefficient($rating, 11);
         $minCrit = $this->GetDataField(PLAYER_SPELL_CRIT_PERCENTAGE1 + 1);
         for($i = 1; $i < 7; $i++) {
@@ -2351,7 +2351,7 @@ Class Characters {
     private function GetCharacterSpellHitRating() {
         $player_stats = array();
         $rating       = $this->SetRating();
-        $player_stats['value'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 7);
+        $player_stats['value'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_HIT_SPELL);
         $player_stats['increasedHitPercent'] = floor($player_stats['value'] / Utils::GetRatingCoefficient($rating, 8));
         $player_stats['penetration'] = $this->GetDataField(PLAYER_FIELD_MOD_TARGET_RESISTANCE);
         $player_stats['reducedResist'] = 0;
@@ -2378,7 +2378,7 @@ Class Characters {
     private function GetCharacterSpellHaste() {
         $player_stats = array();
         $rating       = $this->SetRating();
-        $player_stats['hasteRating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 19);
+        $player_stats['hasteRating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_HASTE_SPELL);
         $player_stats['hastePercent'] = round($player_stats['hasteRating']/ Utils::GetRatingCoefficient($rating, 20), 2);
         unset($rating);
         return $player_stats;
@@ -2420,7 +2420,7 @@ Class Characters {
         $tmp_stats = array();
         $rating    = $this->SetRating();
         $gskill    = $this->db->selectRow("SELECT * FROM `character_skills` WHERE `guid`=%d AND `skill`=95", $this->guid);
-        $tmp_value = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 1);
+        $tmp_value = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_DEFENSE_SKILL);
         $tmp_stats['defense_rating_skill'] = $gskill['value'];
         $tmp_stats['plusDefense'] = round($tmp_value / Utils::GetRatingCoefficient($rating, 2));
         $tmp_stats['value'] = $gskill['value'];
@@ -2447,7 +2447,7 @@ Class Characters {
         $tmp_stats = array();
         $rating    = $this->SetRating();
         $tmp_stats['percent'] = Utils::GetFloatValue($this->GetDataField(PLAYER_DODGE_PERCENTAGE), 2);
-        $tmp_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 2);
+        $tmp_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_DODGE);
         $tmp_stats['increasePercent'] = floor($tmp_stats['rating']/Utils::GetRatingCoefficient($rating, 3));
         unset($rating);
         return $tmp_stats;
@@ -2463,7 +2463,7 @@ Class Characters {
         $tmp_stats = array();
         $rating    = $this->SetRating();
         $tmp_stats['percent'] = Utils::GetFloatValue($this->GetDataField(PLAYER_PARRY_PERCENTAGE), 2);
-        $tmp_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 3);
+        $tmp_stats['rating'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_PARRY);
         $tmp_stats['increasePercent'] = floor($tmp_stats['rating']/Utils::GetRatingCoefficient($rating, 4));
         unset($rating);
         return $tmp_stats;
@@ -2479,7 +2479,7 @@ Class Characters {
         $tmp_stats = array();
         $blockvalue = $this->GetDataField(PLAYER_BLOCK_PERCENTAGE);
         $tmp_stats['percent'] =  Utils::GetFloatValue($blockvalue, 2);
-        $tmp_stats['increasePercent'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + 4);
+        $tmp_stats['increasePercent'] = $this->GetDataField(PLAYER_FIELD_COMBAT_RATING_1 + CR_BLOCK);
         $tmp_stats['rating'] = $this->GetDataField(PLAYER_SHIELD_BLOCK);
         return $tmp_stats;
     }
