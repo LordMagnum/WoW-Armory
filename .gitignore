@@ -2,5 +2,7 @@ includes/classes/configuration.php
 models/*
 images/*
 cache/_debug/tmp.dbg
+cache/*/*
+!cache/*/.gitignore
 wow-icons/_images/*
 !wow-icons/_images/.htaccess
