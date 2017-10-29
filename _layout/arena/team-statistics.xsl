@@ -8,7 +8,7 @@
     <xsl:param name="theSize" />
     <xsl:param name="isPropass" select="'false'" />
 
-	<!--Creation of the rank-->	
+	<!--Creation of the rank-->
     <xsl:variable name="standingPrint">
         <xsl:choose>
             <xsl:when test="@ranking != 0 and @ranking &lt;= 1000">
@@ -22,13 +22,13 @@
 
     <!--Arena Team Badge-->
 	<xsl:call-template name="printBadge">
-		<xsl:with-param name="standingPrint" select="$standingPrint" />	
+		<xsl:with-param name="standingPrint" select="$standingPrint" />
 	</xsl:call-template>
 
 
 	<div class="filterTitle">
 		<xsl:value-of select="$loc/strs/unsorted/str[@id='armory.tabs.statistics']"/>
-	</div>			
+	</div>
     <div class="stats-container" style="margin-bottom: 10px;">
         <div class="arenaTeam-data">
             <div class="innerData">
@@ -87,7 +87,7 @@
 									<xsl:when test="@size=2"><xsl:value-of select="$loc/strs/unsorted/str[@id='armory.labels.twoteamstats']"/></xsl:when>
 									<xsl:when test="@size=3"><xsl:value-of select="$loc/strs/unsorted/str[@id='armory.labels.threeteamstats']"/></xsl:when>
 									<xsl:otherwise><xsl:value-of select="$loc/strs/unsorted/str[@id='armory.labels.fiveteamstats']"/></xsl:otherwise>
-                                </xsl:choose>	  
+                                </xsl:choose>
                                 </p></td>
                                 <td align="center"><p><xsl:value-of select="@seasonGamesPlayed"/></p></td>
                                 <td align="center"><p><xsl:value-of select="@seasonGamesWon"/> - <xsl:value-of select="$gamesLostTeam"/></p></td>
@@ -96,7 +96,7 @@
                                     <xsl:choose>
                                         <xsl:when test="@seasonGamesPlayed=0">0%</xsl:when>
                                         <xsl:otherwise><xsl:value-of select="round((@seasonGamesWon div @seasonGamesPlayed) * 100)" />%</xsl:otherwise>
-                                    </xsl:choose>	  	  
+                                    </xsl:choose>
                                     </p>
                                 </td>
                                 <td align="center"><p class="rating"><xsl:value-of select="@rating"/></p></td>
@@ -105,7 +105,7 @@
                                 <td>
                                     <p><xsl:value-of select="$loc/strs/unsorted/str[@id='armory.character-info.statsBefore']"/>
                                     <xsl:value-of select="$characterName" />
-                                    <xsl:value-of select="$loc/strs/unsorted/str[@id='armory.character-info.characterPossessive']"/> 
+                                    <xsl:value-of select="$loc/strs/unsorted/str[@id='armory.character-info.characterPossessive']"/>
                                     <xsl:value-of select="$loc/strs/unsorted/str[@id='armory.character-info.statsAfter']"/></p>
                                 </td>
                                 <td align="center"><p><xsl:value-of select="$gamesPlayedChar"/></p></td>
@@ -115,12 +115,12 @@
                                     <xsl:choose>
                                         <xsl:when test="$gamesPlayedChar=0">0%</xsl:when>
                                         <xsl:otherwise><xsl:value-of select="round(($gamesWonChar div $gamesPlayedChar) * 100)" />%</xsl:otherwise>
-                                    </xsl:choose>	  	  	  
+                                    </xsl:choose>
                                     </p>
                                 </td>
                                 <td align="center"><p class="rating"><xsl:value-of select="@rating"/></p></td>
                             </tr>
-                        </table>	
+                        </table>
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
@@ -160,27 +160,27 @@
                     <xsl:choose>
                          <xsl:when test="@ranking &gt; 1000 or @ranking=0">background-image:url(images/icons/badges/arena/arena-6.jpg);</xsl:when>
                          <xsl:when test="@ranking &gt; 500">background-image:url(images/icons/badges/arena/arena-5.jpg);</xsl:when>
-                         <xsl:when test="@ranking &gt; 100">background-image:url(images/icons/badges/arena/arena-4.jpg);</xsl:when>	 
-                         <xsl:when test="@ranking &gt; 10">background-image:url(images/icons/badges/arena/arena-3.jpg);</xsl:when>	 
-                         <xsl:when test="@ranking = 1">background-image:url(images/icons/badges/arena/arena-2.jpg);</xsl:when>	 
-                         <xsl:otherwise>background-image:url(images/icons/badges/arena/arena-6.jpg);</xsl:otherwise>	 
+                         <xsl:when test="@ranking &gt; 100">background-image:url(images/icons/badges/arena/arena-4.jpg);</xsl:when>
+                         <xsl:when test="@ranking &gt; 10">background-image:url(images/icons/badges/arena/arena-3.jpg);</xsl:when>
+                         <xsl:when test="@ranking = 1">background-image:url(images/icons/badges/arena/arena-2.jpg);</xsl:when>
+                         <xsl:otherwise>background-image:url(images/icons/badges/arena/arena-6.jpg);</xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
                 <img class="p">
                     <xsl:attribute name="src">
                         <xsl:choose>
-                             <xsl:when test="@ranking &gt; 1000 or @ranking=0">images/badge-border-arena-parchment.gif</xsl:when>
-                             <xsl:when test="@ranking &gt; 500">images/badge-border-arena-bronze.gif</xsl:when>
-                             <xsl:when test="@ranking &gt; 100">images/badge-border-arena-bronze-large.gif</xsl:when>	 
-                             <xsl:when test="@ranking &gt; 10">images/badge-border-arena-silver.gif</xsl:when>	 
-                             <xsl:when test="@ranking = 1">images/badge-border-arena-gold.gif</xsl:when>	 
-                             <xsl:otherwise>/_images/badge-border-arena-parchment.gif</xsl:otherwise>	 
+                             <xsl:when test="@ranking &gt; 1000 or @ranking=0">images/badge-border-pvp-parchment.gif</xsl:when>
+                             <xsl:when test="@ranking &gt; 500">images/badge-border-pvp-bronze.gif</xsl:when>
+                             <xsl:when test="@ranking &gt; 100">images/badge-border-pvp-bronze-large.gif</xsl:when>
+                             <xsl:when test="@ranking &gt; 10">images/badge-border-pvp-silver.gif</xsl:when>
+                             <xsl:when test="@ranking = 1">images/badge-border-pvp-gold.gif</xsl:when>
+                             <xsl:otherwise>/_images/badge-border-pvp-parchment.gif</xsl:otherwise>
                         </xsl:choose>
                     </xsl:attribute>
-                </img>	 
+                </img>
             </div>
         </div>
-        <a class="standing-link" href="arena-ladder.xml?{@realmUrl}"><img src="images/pixel.gif" /></a>			
+        <a class="standing-link" href="arena-ladder.xml?{@realmUrl}"><img src="images/pixel.gif" /></a>
     </div>
 </xsl:template>
 
