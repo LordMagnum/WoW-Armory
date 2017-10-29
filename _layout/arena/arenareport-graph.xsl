@@ -196,7 +196,6 @@
                 <xsl:with-param name="flashvars" select="concat('arenaSeason=', $season, '&amp;teamSize=',
 					/page/gameListingChart/arenaTeam/@teamSize, '&amp;teamRealm=',
 					/page/gameListingChart/arenaTeam/@realm,'&amp;teamName=',/page/gameListingChart/arenaTeam/@name)"/>
-                <xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.gif class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
             </xsl:call-template>
         </div>
 

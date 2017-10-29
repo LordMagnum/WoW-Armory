@@ -105,7 +105,6 @@
                     <xsl:with-param name="width" select="'78'"/>
                     <xsl:with-param name="height" select="'78'"/>
                     <xsl:with-param name="quality" select="'high'"/>
-                    <xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.gif class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
                     <xsl:with-param name="flashvars" select="concat('totalIcons=1&#38;totalIcons=1&#38;startPointX=4&#38;initScale=100&#38;overScale=100&#38;largeIcon=1&#38;iconColor1=',$pathWinner/@emblemIconColor,'&#38;iconName1=images/icons/team/pvp-banner-emblem-',$pathWinner/@emblemIconStyle,'.png&#38;bgColor1=',$pathWinner/@emblemBackground,'&#38;borderColor1=',$pathWinner/@emblemBorderColor,'&#38;teamUrl1=')"/>
                 </xsl:call-template>
             </div>
@@ -136,7 +135,6 @@
 						<xsl:with-param name="width" select="'78'"/>
 						<xsl:with-param name="height" select="'78'"/>
 						<xsl:with-param name="quality" select="'high'"/>
-						<xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.gif class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
 						<xsl:with-param name="flashvars" select="concat('totalIcons=1&#38;totalIcons=1&#38;startPointX=4&#38;initScale=100&#38;overScale=100&#38;largeIcon=1&#38;iconColor1=',$pathLoser/@emblemIconColor,'&#38;iconName1=images/icons/team/pvp-banner-emblem-',$pathLoser/@emblemIconStyle,'.png&#38;bgColor1=',$pathLoser/@emblemBackground,'&#38;borderColor1=',$pathLoser/@emblemBorderColor,'&#38;teamUrl1=')"/>
 					</xsl:call-template>
 				</div>
