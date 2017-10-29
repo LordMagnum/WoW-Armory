@@ -740,7 +740,7 @@
 							<xsl:with-param name="height" select="'40'"/>
 							<xsl:with-param name="quality" select="'best'"/>
 							<xsl:with-param name="flashvars" select="concat('rankNum=', $standingTxt)"/>
-							<xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.png class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
+							<xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.gif class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
 						</xsl:call-template>
 					</div>
 

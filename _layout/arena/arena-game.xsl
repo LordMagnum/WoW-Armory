@@ -7,10 +7,10 @@
 <xsl:variable name="pathWinner" select="/page/game/team[@result = 'win']" />
 <xsl:variable name="pathLoser" select="/page/game/team[@result = 'loss']" />
 
-<xsl:variable name="urlTeamSelected" select="concat('../../arena-team-game-chart.xml?r=', 
-												document('../../team-info-last.xml')/page/arenaTeamCommand/@realm, 
-                                                '&amp;t=', 
-                                                document('../../team-info-last.xml')/page/arenaTeamCommand/@teamName, 
+<xsl:variable name="urlTeamSelected" select="concat('../../arena-team-game-chart.xml?r=',
+												document('../../team-info-last.xml')/page/arenaTeamCommand/@realm,
+                                                '&amp;t=',
+                                                document('../../team-info-last.xml')/page/arenaTeamCommand/@teamName,
                                                 '&amp;ts=', document('../../team-info-last.xml')/page/arenaTeamCommand/@teamSize)" />
 <xsl:variable name="isTeamSelected" select="document('../../team-info-last.xml')/page/arenaTeam/@teamSize" />
 
@@ -28,7 +28,7 @@
                                         <xsl:value-of select="$loc/strs/arena/str[@id='error.nodata']"/>
                                     </div>
                                 </div>
-                            </div>        
+                            </div>
                         </div>
                     </div>
 				</div>
@@ -39,21 +39,21 @@
 			<!--<script type="text/javascript" src="shared/global/third-party/jquery/jquery.uitablefilter.js"></script>-->
 			<script type="text/javascript" src="_js/arena-report/arena-game.js"></script>
             <script type="text/javascript">
-                $(document).ready(function(){			
+                $(document).ready(function(){
                     initializeArenaGame(
 						"<xsl:value-of select="/page/game/@matchStartTime" />",
 						"<xsl:value-of select="/page/game/@matchLength" />",
 						"<xsl:value-of select="/page/game/@realmOffset" />"
 					);
-                });			
+                });
             </script>
-            
+
             <div id="dataElement">
                 <div class="parchment-top">
                     <xsl:call-template name="arenaGameHolder" />
                 </div>
             </div>
-        </xsl:otherwise>        
+        </xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 
@@ -65,7 +65,7 @@
 				<div class="info-pane">
             		<xsl:call-template name="arenaGameContent" />
 				</div>
-			</div>        
+			</div>
         </div>
     </div>
 </xsl:template>
@@ -75,7 +75,7 @@
 	<xsl:variable name="battleGroup" select="/page/game/@battleGroup" />
 	<div class="profile-wrapper">
         <blockquote>
-        	<b class="iarenateams">        
+        	<b class="iarenateams">
                 <xsl:choose>
                     <xsl:when test="string-length($isTeamSelected) &gt; 0">
 						<h4><a href="{$urlTeamSelected}"><xsl:value-of select="$loc/strs/arena/str[@id='match-history']"/></a></h4>
@@ -83,10 +83,10 @@
                     <xsl:otherwise>
 						<h4><xsl:value-of select="$loc/strs/arena/str[@id='match-history']"/></h4>
                     </xsl:otherwise>
-                </xsl:choose>        
+                </xsl:choose>
                 <h3>
 					<xsl:apply-templates mode="printf" select="$loc/strs/arenaReport/str[@id='reportHeader']">
-						<xsl:with-param name="param1" select="@teamSize" />					
+						<xsl:with-param name="param1" select="@teamSize" />
 					</xsl:apply-templates>
                 </h3>
         	</b>
@@ -105,7 +105,7 @@
                     <xsl:with-param name="width" select="'78'"/>
                     <xsl:with-param name="height" select="'78'"/>
                     <xsl:with-param name="quality" select="'high'"/>
-                    <xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.png class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
+                    <xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.gif class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
                     <xsl:with-param name="flashvars" select="concat('totalIcons=1&#38;totalIcons=1&#38;startPointX=4&#38;initScale=100&#38;overScale=100&#38;largeIcon=1&#38;iconColor1=',$pathWinner/@emblemIconColor,'&#38;iconName1=images/icons/team/pvp-banner-emblem-',$pathWinner/@emblemIconStyle,'.png&#38;bgColor1=',$pathWinner/@emblemBackground,'&#38;borderColor1=',$pathWinner/@emblemBorderColor,'&#38;teamUrl1=')"/>
                 </xsl:call-template>
             </div>
@@ -136,7 +136,7 @@
 						<xsl:with-param name="width" select="'78'"/>
 						<xsl:with-param name="height" select="'78'"/>
 						<xsl:with-param name="quality" select="'high'"/>
-						<xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.png class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
+						<xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.gif class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
 						<xsl:with-param name="flashvars" select="concat('totalIcons=1&#38;totalIcons=1&#38;startPointX=4&#38;initScale=100&#38;overScale=100&#38;largeIcon=1&#38;iconColor1=',$pathLoser/@emblemIconColor,'&#38;iconName1=images/icons/team/pvp-banner-emblem-',$pathLoser/@emblemIconStyle,'.png&#38;bgColor1=',$pathLoser/@emblemBackground,'&#38;borderColor1=',$pathLoser/@emblemBorderColor,'&#38;teamUrl1=')"/>
 					</xsl:call-template>
 				</div>
@@ -181,18 +181,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="matchstats">	
+	<div class="matchstats">
 		<xsl:value-of select="$loc/strs/arenaReport/str[@id='gameInfo.map']"/>&#160;
 		<span><xsl:value-of select="/page/game/@map" /></span>
-					
+
 		<xsl:value-of select="$loc/strs/arenaReport/str[@id='gameInfo.startTime']"/>&#160;
 		<span id="matchStartTime"><xsl:value-of select="/page/game/@matchStartTime" /></span>
-		
+
 		<xsl:value-of select="$loc/strs/arenaReport/str[@id='gameInfo.matchLength']"/>&#160;
-		<span id="matchLength"><xsl:value-of select="/page/game/@matchLength" /></span>	
+		<span id="matchLength"><xsl:value-of select="/page/game/@matchLength" /></span>
 	</div>
 
-    
+
 	<div class="data">
         <table id="arenaGameTable" class="data-table sortTable" cellpadding="0" cellspacing="0" style="width: 100%">
             <thead>
@@ -229,30 +229,30 @@
                 </tr>
             </thead>
             <tbody>
-                <xsl:for-each select="/page/game/team">                	
+                <xsl:for-each select="/page/game/team">
                     <xsl:variable name="teamName" select="@name" />
 					<xsl:variable name="isDeleted" select="@deleted" />
                     <xsl:variable name="teamUrl" select="@teamUrl" />
-                	<xsl:for-each select="current()/member">                    
+                	<xsl:for-each select="current()/member">
                     	<xsl:variable name="classTxt"	select="$loc/strs/classes/str[@id=concat('armory.classes.class.',current()/@classId,'.',current()/@genderId)]" />
                         <xsl:variable name="raceTxt"	select="$loc/strs/races/str[@id=concat('armory.races.race.',current()/@raceId,'.',current()/@genderId)]" />
-                        <xsl:variable name="factionTxt" select="$loc/strs/unsorted/str[@id=concat('armory.labels.faction.',current()/@factionId)]" />                    
+                        <xsl:variable name="factionTxt" select="$loc/strs/unsorted/str[@id=concat('armory.labels.faction.',current()/@factionId)]" />
                         <tr>
                             <td><a href="character-sheet.xml?{@url}"><xsl:value-of select="@characterName"/></a></td>
                             <td style="overflow:hidden;">
 								<xsl:choose>
 									<xsl:when test="$isDeleted = 'true'">
-										<a href="javascript:void(0)" class="graphLink delGraphLink staticTip" 
+										<a href="javascript:void(0)" class="graphLink delGraphLink staticTip"
 											onmouseover="setTipText('{$loc/strs/arena/str[@id='deletedTeam']}');" />
-										<a href="javascript:void(0)" class="truncateMe graphTxt staticTip deletedTeam" 
-		                                	onmouseover="setTipText('{$loc/strs/arena/str[@id='deletedTeam']}');"><xsl:value-of select="$teamName" /></a>									
+										<a href="javascript:void(0)" class="truncateMe graphTxt staticTip deletedTeam"
+		                                	onmouseover="setTipText('{$loc/strs/arena/str[@id='deletedTeam']}');"><xsl:value-of select="$teamName" /></a>
 									</xsl:when>
 									<xsl:otherwise>
-										<a href="arena-team-game-chart.xml?{$teamUrl}" class="graphLink staticTip" 
+										<a href="arena-team-game-chart.xml?{$teamUrl}" class="graphLink staticTip"
 											onmouseover="setTipText('{$loc/strs/arenaReport/str[@id='viewTeamHistory']}');" />
-										<a class="truncateMe graphTxt staticTip" onmouseover="setTipText('{$loc/strs/arenaReport/str[@id='viewTeamProfile']}');" 
-											href="team-info.xml?{$teamUrl}"><xsl:value-of select="$teamName"/></a>									
-									</xsl:otherwise>								
+										<a class="truncateMe graphTxt staticTip" onmouseover="setTipText('{$loc/strs/arenaReport/str[@id='viewTeamProfile']}');"
+											href="team-info.xml?{$teamUrl}"><xsl:value-of select="$teamName"/></a>
+									</xsl:otherwise>
 								</xsl:choose>
 							</td>
                             <td class="centNum">

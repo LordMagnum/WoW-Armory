@@ -21,7 +21,7 @@
 
 <!-- layout call -->
 <xsl:template match="page/gameListingChart"><link rel="stylesheet" href="_css/arena-report.css" /><link rel="stylesheet" href="_css/datepicker.css" />
-	
+
     <div id="dataElement">
         <div class="parchment-top">
             <xsl:call-template name="arenaReportGraphHolder" />
@@ -40,11 +40,11 @@
 	                            <xsl:value-of select="$loc/strs/arena/str[@id='error.nodata']"/>
                             </div>
                         </div>
-                    </div>        
+                    </div>
                 </div>
             </div>
         </xsl:when>
-        <xsl:otherwise>            
+        <xsl:otherwise>
             <div class="parchment-content">
                 <div class="list">
 					<xsl:call-template name="tabs">
@@ -53,15 +53,15 @@
 						<xsl:with-param name="subTab" select="''" />
 						<xsl:with-param name="tabUrlAppend" select="/page/gameListingChart/arenaTeam/@teamUrl" />
 						<xsl:with-param name="subtabUrlAppend" select="''" />
-					</xsl:call-template>					
+					</xsl:call-template>
                     <div class="full-list">
                         <div class="info-pane">
                             <xsl:call-template name="arenaReportGraphContent" />
                         </div>
                     </div>
                 </div>
-            </div>        
-        </xsl:otherwise>    
+            </div>
+        </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
 
@@ -75,14 +75,14 @@
 		<xsl:with-param name="whichPage" select="'team'"/>
 		<xsl:with-param name="docHeader" select="/page/gameListingChart/arenaTeam" />
     </xsl:call-template>
-    
+
     <!-- match history graph title -->
     <div class="filterTitle">
         <xsl:value-of select="$loc/strs/arenaReport/str[@id='matchhistorygraphfor']"/>
         <span class="detailsBlueItalicDates">
 			(<span id="blueStartDate" /> - <span id="blueEndDate" />)
 		</span>
-	</div>	
+	</div>
 	<xsl:choose>
 		<xsl:when test="not(/page/gameListingChart/games/game)">
 			<div id="graphNone">
@@ -90,7 +90,7 @@
 			</div>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:call-template name="gameGraph" />		
+			<xsl:call-template name="gameGraph" />
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
@@ -101,7 +101,7 @@
 <xsl:template name="gameGraph">
 
 	<script type="text/javascript" src="_js/arena-report/graph.js"></script>
-	
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//"no search results" text, season start date, season end date
@@ -115,7 +115,7 @@
 				"<xsl:value-of select="/page/gameListingChart/arenaTeam/@battleGroup" />",
 				"<xsl:value-of select="$loc/strs/arena/str[@id='current']"/>"
 			);
-		});			
+		});
 	</script>
 	<span id="gameStartVal" style="display:none; width: 0; height: 0;"><xsl:value-of select="/page/season/@start" /></span>
 	<span id="serverOffset" style="display:none; width: 0; height: 0;"><xsl:value-of select="/page/gameListingChart/games/game/@realmOffset" /></span>
@@ -123,14 +123,14 @@
 
 	<!-- flash graph -->
     <div id="graphContainer">
-		<div id="infoBubbleHolder">		
-		
+		<div id="infoBubbleHolder">
+
 			<div id="rightBubble" style="white-space:nowrap">
 				<div id="textEndDate" style="white-space:nowrap"></div>
 				<span class="detailsBrownItalic" style="white-space:nowrap"><xsl:value-of select="$loc/strs/arenaReport/str[@id='ratingcolon']"/></span>
                 <span id="textRatingRight" class="detailsBrownItalicLarge" style="white-space:nowrap"/>
 			</div>
-			
+
 			<div style="width: 340px; height: 39px; left: 279px; position: absolute;">
 				<div id="containerDetails">
 					<div style="position: absolute; margin: 9px 0 0 8px;">
@@ -154,37 +154,37 @@
 				</div>
 				<div id="containerDelta" style="white-space:nowrap">
 					<div style="position: absolute; margin: 9px 0 0 8px;">
-						<span class="detailsBlueItalic" style="white-space:nowrap;"><xsl:value-of select="$loc/strs/arenaReport/str[@id='gamesdisplayed']"/></span> 
+						<span class="detailsBlueItalic" style="white-space:nowrap;"><xsl:value-of select="$loc/strs/arenaReport/str[@id='gamesdisplayed']"/></span>
 						<span id="textGamesPlayed" class="bold detailsBrown" style="white-space:nowrap;"/>&#xa0;
 						<span class="bold detailsBrown" style="white-space:nowrap;"><xsl:value-of select="$loc/strs/arenaReport/str[@id='of']"/></span>&#xa0;
 						<span id="textTotalGames" class="bold detailsBrown" style="white-space:nowrap;"/>
 					</div>
 					<div style="position: absolute; margin: 26px 0 0 8px; white-space:nowrap;">
-						<span class="detailsBlueItalic staticTip" onmouseover="setTipText('{$loc/strs/arenaReport/str[@id='netchange.selection']}')" 
-							style="white-space:nowrap;"><xsl:value-of select="$loc/strs/arenaReport/str[@id='netchange.selection.short']"/></span> 
+						<span class="detailsBlueItalic staticTip" onmouseover="setTipText('{$loc/strs/arenaReport/str[@id='netchange.selection']}')"
+							style="white-space:nowrap;"><xsl:value-of select="$loc/strs/arenaReport/str[@id='netchange.selection.short']"/></span>
 						<span id="textRatingChangeInterval" class="bold" style="white-space:nowrap;"/>
 						<span class="limitAverageBrown" style="padding-left: 10px;">
-						(						
+						(
 							<xsl:apply-templates mode="printf" select="$loc/strs/arenaReport/str[@id='averagechange']">
 								<xsl:with-param name="param1">
 									<span id="textRatingChangeAverage" style="white-space:nowrap;"/>
-								</xsl:with-param>	
+								</xsl:with-param>
 							</xsl:apply-templates>
 						)
 						</span>
 					</div>
-				</div>			
+				</div>
 			</div>
-			
+
 			<div id="leftBubble"  style="white-space:nowrap">
 				<div id="textStartDate" style="white-space:nowrap;"></div>
 				<span class="detailsBrownItalic" style="white-space:nowrap;"><xsl:value-of select="$loc/strs/arenaReport/str[@id='ratingcolon']"/></span>
                 <span id="textRatingLeft" style="white-space:nowrap;" class="detailsBrownItalicLarge"/>
 			</div>
 		</div>
-		
 
-        <div id="arenaFlashOuter">	
+
+        <div id="arenaFlashOuter">
             <xsl:call-template name="flash">
                 <xsl:with-param name="id" select="'arenaflash'"/>
                 <xsl:with-param name="src" select="'_flash/graph.swf'"/>
@@ -193,14 +193,14 @@
                 <xsl:with-param name="width" select="'875'"/>
                 <xsl:with-param name="height" select="'470'"/>
                 <xsl:with-param name="quality" select="'autohigh'"/>
-                <xsl:with-param name="flashvars" select="concat('arenaSeason=', $season, '&amp;teamSize=', 
-					/page/gameListingChart/arenaTeam/@teamSize, '&amp;teamRealm=', 
+                <xsl:with-param name="flashvars" select="concat('arenaSeason=', $season, '&amp;teamSize=',
+					/page/gameListingChart/arenaTeam/@teamSize, '&amp;teamRealm=',
 					/page/gameListingChart/arenaTeam/@realm,'&amp;teamName=',/page/gameListingChart/arenaTeam/@name)"/>
-                <xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.png class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
+                <xsl:with-param name="noflash" select="concat('&lt;div class=teamicon-noflash&gt;&lt;a target=_blank href=http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash&gt;&lt;img src=images/',$lang,'/getflash.gif class=p/&gt;&lt;/a&gt;&lt;/div&gt;')"/>
             </xsl:call-template>
         </div>
 
-    
+
         <div id="graphBottom">
             <a id="matchHighlight" class="detailsBlueItalic" style="margin: 0 25px 0 0; display: none;" href="javascript:FnClearHighlightInFlash();">
                 <xsl:value-of select="$loc/strs/arenaReport/str[@id='clearmatchhighlight']"/>
@@ -218,18 +218,18 @@
 		<!-- show sortable table -->
 		<xsl:call-template name="matchTable" />
 	</div>
-	
+
 	<div id="errorLoadingArenaData" style="display: none;">
 		<xsl:value-of select="$loc/strs/guildBank/str[@id='errorcontent']"/>
 	</div>
 </xsl:template>
 
-<xsl:template name="matchTable">	
+<xsl:template name="matchTable">
     <div class="filterTitle">
-		<xsl:value-of select="$loc/strs/arenaReport/str[@id='matchhistoryfilters']"/>            
+		<xsl:value-of select="$loc/strs/arenaReport/str[@id='matchhistoryfilters']"/>
     </div>
-    
-    <div class="filtercontainer">    
+
+    <div class="filtercontainer">
         <div id="opponentFilter" class="filterBox">
 			<xsl:value-of select="$loc/strs/arena/str[@id='opponent']" /><br />
 			<input id="opponentVal" type="text" size="30" maxlength="30" value="" class="filterInput" style="width: 200px;"/>
@@ -237,21 +237,21 @@
         <div id="dateRange" class="filterBox">
 			<xsl:value-of select="$loc/strs/arenaReport/str[@id='filter.dateRange']" /><br />
 			<span id="dateStart" class="filterInput"></span>
-			<a id="dateStartLink" class="calIcon" href="javascript:void(0)"> </a>            
-			<span class="inlineTxt"> - </span>            
-			<span id="dateEnd" class="filterInput"></span>    
+			<a id="dateStartLink" class="calIcon" href="javascript:void(0)"> </a>
+			<span class="inlineTxt"> - </span>
+			<span id="dateEnd" class="filterInput"></span>
 			<a id="dateEndLink" class="calIcon"  href="javascript:void(0)"> </a>
         </div>
-    
+
     	<div id="rating" class="filterBox">
-			<xsl:value-of select="$loc/strs/arenaReport/str[@id='filter.ratingBetween']" /><br />            
+			<xsl:value-of select="$loc/strs/arenaReport/str[@id='filter.ratingBetween']" /><br />
 			<input id="ratingMin" type="text" maxlength="4" value="{/page/gameListingChart/arenaTeam/@lowestRating}" class="filterInput" />
-			<span class="inlineTxt"> - </span>            
+			<span class="inlineTxt"> - </span>
 			<input id="ratingMax" type="text" maxlength="4" value="{/page/gameListingChart/arenaTeam/@highestRating}" class="filterInput" />
         </div>
-        
+
         <div id="ratingChangeBox" class="filterBox">
-			<xsl:value-of select="$loc/strs/arenaReport/str[@id='filter.ratingChange']" /><br />				
+			<xsl:value-of select="$loc/strs/arenaReport/str[@id='filter.ratingChange']" /><br />
 			<select id="ratingLogic" style="width: 60px; margin-right: 5px; float: left;">
 				<option value="all"><xsl:value-of select="$loc/strs/arenaReport/str[@id='filter.all']" /></option>
 				<option value="eq">=</option>
@@ -262,18 +262,18 @@
 			</select>
 			<input id="ratingChange" type="text" maxlength="4" value="" class="filterInput" />
         </div>
-		<div class="clear"></div>		
-		
+		<div class="clear"></div>
+
 		<div id="filterButtonHolder">
 			<a id="runFilterButton" href="javascript:void(0)" onclick="runFilters();">
 				<span class="btnRight"><xsl:value-of select="$loc/strs/guildBank/str[@id='runfilters']"/></span>
-			</a>            
+			</a>
 			<a id="resetFilterButton" href="javascript:void(0)" onclick="resetFilters();">
 				<xsl:value-of select="$loc/strs/guildBank/str[@id='resetfilters']"/>
 			</a>
 		</div>
-		
-		<div class="clear"></div>		
+
+		<div class="clear"></div>
     </div>
 
 	<div id="pager" class="pager page-body" style="text-align:right;">
@@ -287,18 +287,18 @@
 					</xsl:with-param>
 					<xsl:with-param name="param2">
 						<span id="totalPages"></span>
-					</xsl:with-param>				
+					</xsl:with-param>
 				</xsl:apply-templates>
             </div>
-            <div style="float: left; margin-left: 25px; line-height: 24px; height: 24px;">			
-				<!-- showing X of X results -->				
+            <div style="float: left; margin-left: 25px; line-height: 24px; height: 24px;">
+				<!-- showing X of X results -->
 				<xsl:apply-templates mode="printf" select="$loc/strs/itemsOptions/str[@id='armory.search.showing']">
 					<xsl:with-param name="param1">
 						<span id="currResults" class="bold"><xsl:value-of select="count(/page/gameListingChart/games/game)" /></span>
 					</xsl:with-param>
 					<xsl:with-param name="param2">
 						<span id="totalResults" class="bold"><xsl:value-of select="count(/page/gameListingChart/games/game)" /></span>
-					</xsl:with-param>				
+					</xsl:with-param>
 				</xsl:apply-templates>
             </div>
             <div id="pageSelector" style="float: right">
@@ -342,19 +342,19 @@
 							<span style="display: none;"><xsl:value-of select="@ot" /></span>
 							<xsl:choose>
 								<xsl:when test="@deleted = 'true'">
-									<a href="javascript:void(0)" class="graphLink delGraphLink staticTip" 
+									<a href="javascript:void(0)" class="graphLink delGraphLink staticTip"
 										onmouseover="setTipText('{$loc/strs/arena/str[@id='deletedTeam']}');" />
-									<a href="javascript:void(0)" class="graphTxt staticTip deletedTeam" 
+									<a href="javascript:void(0)" class="graphTxt staticTip deletedTeam"
 										onmouseover="setTipText('{$loc/strs/arena/str[@id='deletedTeam']}');"><xsl:value-of select="@ot" /></a>
 								</xsl:when>
 								<xsl:otherwise>
-									<a href="arena-team-game-chart.xml?{@teamUrl}" class="graphLink staticTip" 
+									<a href="arena-team-game-chart.xml?{@teamUrl}" class="graphLink staticTip"
 										onmouseover="setTipText('{$loc/strs/arenaReport/str[@id='viewTeamHistory']}');" />
-									<a class="graphTxt staticTip" onmouseover="setTipText('{$loc/strs/arenaReport/str[@id='viewTeamProfile']}');" 
+									<a class="graphTxt staticTip" onmouseover="setTipText('{$loc/strs/arenaReport/str[@id='viewTeamProfile']}');"
 										href="team-info.xml?{@teamUrl}"><xsl:value-of select="@ot" /></a>
 								</xsl:otherwise>
 							</xsl:choose>
-						</td>                    
+						</td>
 						<td class="rightNum"><xsl:value-of select="@r" /></td>
 						<td class="rightNum">
 							<!-- calc change -->
@@ -375,9 +375,9 @@
 						<td style="font-weight: normal;">
 							<span style="display: none;"><xsl:value-of select="@st" /></span>
 							<span class="timeFormat"><xsl:value-of select="@st" /></span>
-							<a class="staticTip goToMatchReport" onmouseover="setTipText('{$loc/strs/arena/str[@id='goToMatchReport']}')" 
+							<a class="staticTip goToMatchReport" onmouseover="setTipText('{$loc/strs/arena/str[@id='goToMatchReport']}')"
 								href="arena-game.xml?gid={@id}&amp;r={/page/gameListingChart/arenaTeam/@realmName}"> </a>
-							<a class="staticTip findMatch" onmouseover="setTipText('{$loc/strs/arena/str[@id='findMatch']}')" 
+							<a class="staticTip findMatch" onmouseover="setTipText('{$loc/strs/arena/str[@id='findMatch']}')"
 								href="javascript:void(0)" onclick="FnHighlightInFlash('{@id}')"></a>
 						</td>
 					</tr>
@@ -391,7 +391,7 @@
 
 <!-- shows +/- and color for rating change -->
 <xsl:template name="ratingChange">
-	<xsl:param name="ratingNum" />    
+	<xsl:param name="ratingNum" />
 	<span style="font-weight: bold; color: #336600; text-align:right">
         <xsl:if test="$ratingNum &lt; 0">
             <xsl:attribute name="style">font-weight: bold; color: #CC0000;</xsl:attribute>
